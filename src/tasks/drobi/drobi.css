@@ -1,0 +1,342 @@
+/* ───────── «Дроби» tasks ───────── */
+
+.drobi-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: var(--green);
+  box-shadow: 0 8px 16px -8px rgba(29, 26, 43, 0.5);
+}
+.drobi-badge.is-wrong {
+  background: var(--red);
+}
+
+/* burger rounds */
+.drobi-rounds {
+  width: 100%;
+  gap: clamp(10px, 2vw, 22px);
+}
+.drobi-rounds__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.drobi-duel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(40px, 6vw, 90px) minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  max-width: 720px;
+}
+.drobi-duel__sign {
+  display: grid;
+  place-items: center;
+  font-size: clamp(44px, 6vw, 88px);
+  font-weight: 900;
+  color: var(--ink);
+  min-height: 1em;
+}
+.drobi-duel__sign span {
+  display: block;
+}
+.drobi-burger {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(10px, 1.6vw, 20px) clamp(6px, 1.2vw, 16px) clamp(12px, 1.6vw, 20px);
+  border-radius: 30px;
+  background: transparent;
+  box-shadow: inset 0 0 0 0 transparent;
+  transition: box-shadow 0.3s, background 0.3s;
+  touch-action: manipulation;
+}
+.drobi-burger:hover:not(:disabled) {
+  background: rgba(255, 253, 248, 0.55);
+}
+.drobi-burger:disabled {
+  cursor: default;
+}
+.drobi-burger.is-right {
+  background: rgba(75, 174, 106, 0.1);
+  box-shadow: inset 0 0 0 5px var(--green);
+}
+.drobi-burger.is-wrong {
+  background: rgba(229, 83, 60, 0.08);
+  box-shadow: inset 0 0 0 5px var(--red);
+}
+.drobi-burger__key {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  background: rgba(29, 26, 43, 0.07);
+}
+.drobi-burger__svg {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  overflow: visible;
+}
+.drobi-burger__frac {
+  margin-top: 6px;
+  font-size: clamp(44px, 5vw, 72px);
+  font-weight: 900;
+}
+.drobi-burger__unit {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* readout extras */
+.drobi-eqline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  font-size: clamp(30px, 3.4vw, 46px);
+  color: var(--ink);
+}
+.drobi-eqline .frac {
+  font-size: 1em;
+}
+.drobi-eqline small {
+  font-size: 0.42em;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* clock */
+.drobi-clock-v {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.drobi-clock-v small {
+  font-size: 0.36em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+}
+
+/* equal pizzas: two pizzas on top, the equation «¾ = ?⁄12» under them */
+.drobi-eq {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) auto minmax(0, 1.2fr);
+  grid-template-areas: 'lp . rp' 'lf e rf';
+  align-items: center;
+  justify-items: center;
+  column-gap: clamp(8px, 2vw, 28px);
+  row-gap: 4px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.drobi-eq__lp {
+  grid-area: lp;
+}
+.drobi-eq__rp {
+  grid-area: rp;
+  touch-action: manipulation;
+}
+.drobi-eq__lf {
+  grid-area: lf;
+}
+.drobi-eq__rf {
+  grid-area: rf;
+}
+.drobi-eq__e {
+  grid-area: e;
+}
+.drobi-eq > svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.drobi-eq__frac {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.drobi-eq__frac .frac {
+  font-size: clamp(48px, 5.4vw, 80px);
+  font-weight: 900;
+}
+.drobi-eq__frac .q {
+  opacity: 0.3;
+}
+.drobi-eq__l {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.drobi-eq__l b {
+  color: var(--ink);
+}
+.drobi-eq__e {
+  align-self: start;
+  font-size: clamp(48px, 5.4vw, 80px);
+  font-weight: 900;
+  line-height: 2.1;
+  color: var(--ink);
+  transition: color 0.3s;
+}
+.drobi-eq__e.is-right {
+  color: var(--green);
+}
+.drobi-eq__e.is-wrong {
+  color: var(--red);
+}
+@media (max-width: 700px) {
+  /* phone: small reference pizza + the equation on top, the big pizza to tap below */
+  .drobi-eq {
+    grid-template-columns: minmax(96px, 1fr) auto auto auto;
+    grid-template-areas: 'lp lf e rf' 'rp rp rp rp';
+    column-gap: 10px;
+    row-gap: 10px;
+  }
+  .drobi-eq__rp {
+    max-width: 340px;
+  }
+  .drobi-eq__lf .drobi-eq__l {
+    display: none;
+  }
+  .drobi-eq__l {
+    font-size: 12px;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    max-width: 8em;
+    line-height: 1.2;
+  }
+}
+
+/* order */
+.drobi-order {
+  width: 100%;
+  gap: clamp(14px, 2vw, 26px);
+}
+.drobi-order .sortrow {
+  width: 100%;
+}
+.drobi-order .sortrow--x .sortrow__item {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 170px;
+}
+.drobi-order .sortrow--y {
+  max-width: 340px;
+  margin: 0 auto;
+}
+.drobi-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+.drobi-chip .frac {
+  font-size: clamp(40px, 4.4vw, 62px);
+  font-weight: 900;
+}
+/* keep chips white after the check (the red bars must stay readable) — just ring them.
+   outline, not box-shadow: motion leaves an inline box-shadow on chips that were dragged */
+.drobi-order .sortrow__item.right,
+.drobi-order .sortrow__item.wrong {
+  background: var(--white);
+  color: var(--ink);
+  outline: 4px solid var(--green);
+  outline-offset: -4px;
+}
+.drobi-order .sortrow__item.wrong {
+  outline-color: var(--red);
+}
+.sortrow--y .drobi-chip {
+  flex-direction: row;
+  gap: 18px;
+}
+.drobi-order .sortrow--y .sortrow__item {
+  min-height: 76px;
+  padding: 10px 22px 10px 40px;
+}
+.sortrow--y .drobi-chip .frac {
+  font-size: 30px;
+  min-width: 1.4em;
+}
+.drobi-bar {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 22px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 2px rgba(29, 26, 43, 0.12);
+}
+.sortrow--y .drobi-bar {
+  flex: 1;
+}
+.drobi-bar__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--red);
+  border-radius: 6px 0 0 6px;
+}
+.drobi-bar__cut {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--white);
+  opacity: 0.85;
+}
+.drobi-axis {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 15px;
+}
+.drobi-axis i {
+  flex: 1;
+  height: 3px;
+  border-radius: 3px;
+  background: currentColor;
+  position: relative;
+}
+.drobi-axis i::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-top: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+}

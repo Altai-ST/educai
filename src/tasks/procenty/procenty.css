@@ -1,0 +1,229 @@
+/* «Проценты» tasks — local styles, all prefixed .proc- */
+
+.proc-pct {
+  white-space: nowrap;
+}
+.proc-pct__s {
+  margin-left: 0.08em;
+}
+
+/* «= 35⁄100 = 0,35» under the live readout */
+.proc-eq {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 800;
+  font-size: clamp(26px, 2.6vw, 36px);
+  color: var(--ink);
+}
+.proc-eq .frac {
+  font-size: 0.8em;
+}
+.proc-eq__sign {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* question line of a step: «15 % от 8 000 = ?» */
+.proc-q {
+  font-weight: 800;
+  font-size: clamp(26px, 2.6vw, 36px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.proc-q .proc-pct {
+  color: var(--red);
+}
+.proc-q__muted {
+  color: var(--muted);
+}
+
+.proc-steppanel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(100%, 340px);
+}
+.proc-steppanel .btn {
+  width: 100%;
+}
+.proc-fix {
+  min-height: 24px;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--red);
+}
+.proc-fix b {
+  font-weight: 900;
+}
+
+/* results of quick rounds */
+.proc-sum {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, 400px);
+}
+.proc-sum__row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 1px 0 rgba(29, 26, 43, 0.06), 0 12px 24px -18px rgba(29, 26, 43, 0.45);
+  font-weight: 800;
+  font-size: clamp(17px, 1.8vw, 22px);
+  white-space: nowrap;
+}
+.proc-sum__row s {
+  color: var(--red);
+  opacity: 0.8;
+  margin-right: 8px;
+  font-weight: 700;
+}
+.proc-sum__row .proc-pct,
+.proc-sum__v {
+  white-space: nowrap;
+}
+.proc-sum__v {
+  text-align: right;
+  color: var(--teal);
+  font-weight: 900;
+}
+.proc-sum__mark {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: var(--green);
+}
+.proc-sum__mark.is-wrong {
+  background: var(--red);
+}
+.proc-sum__mark .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* chain of discounts: 8 000 · −50 % · −10 % · ? */
+.proc-chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 20px;
+}
+.proc-chain > span {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--white);
+  box-shadow: 0 8px 18px -14px rgba(29, 26, 43, 0.5);
+  white-space: nowrap;
+}
+.proc-chain > span.is-red {
+  background: var(--red);
+  color: var(--white);
+}
+.proc-chain > span.is-ink {
+  background: var(--ink);
+  color: #7cf29a;
+}
+.proc-chain > span.is-teal {
+  background: var(--teal);
+  color: var(--white);
+}
+.proc-chain > i {
+  font-style: normal;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* the round caption in «Сколько процентов?» */
+.proc-cap {
+  line-height: 1;
+}
+.proc-cap b {
+  display: block;
+  font-weight: 900;
+  font-size: clamp(40px, 4.4vw, 64px);
+  letter-spacing: -0.03em;
+}
+.proc-cap span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 17px;
+}
+
+/* matcher captions */
+.proc-match {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.proc-match__heads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(60px, 14vw, 220px);
+  width: 100%;
+  max-width: 780px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.proc-match .matcher__item .proc-pct {
+  color: var(--ink);
+}
+.proc-match .matcher__item .frac {
+  font-size: 0.82em;
+}
+
+@media (max-width: 480px) {
+  .proc-chain {
+    gap: 6px;
+    font-size: 17px;
+  }
+  .proc-chain > span {
+    height: 38px;
+    padding: 0 11px;
+  }
+  .proc-chain > .proc-chain__end {
+    display: none;
+  }
+  .proc-sum__row {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+}
+@media (max-width: 860px) {
+  .proc-match {
+  }
+  .proc-steppanel,
+  .proc-sum {
+    margin: 0 auto;
+  }
+  .proc-eq,
+  .proc-chain {
+    justify-content: center;
+  }
+  .proc-q {
+    text-align: center;
+  }
+}

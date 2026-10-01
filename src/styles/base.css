@@ -1,0 +1,398 @@
+@import '@fontsource-variable/onest';
+@import '@fontsource-variable/unbounded';
+
+/* The videos' own font — used only inside stages (the "world" of a video), not in the portal UI. */
+@font-face {
+  font-family: 'Rubik';
+  src: url('/fonts/Rubik.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+:root {
+  /* ── portal ── */
+  --bg: #f2f1ed;
+  --bg-2: #e9e7e1;
+  --surface: #ffffff;
+  --fg: #101015;
+  --fg-2: #1b1b23;
+  --fg-3: #2a2a35;
+  --night: #0c0c11;
+  --mute: #6d6c77;
+  --mute-dark: #9a99a8;
+  --line: rgba(16, 16, 21, 0.09);
+  --line-dark: rgba(255, 255, 255, 0.09);
+  --brand: #6b4bff;
+  --lime: #c9f45d;
+  --hot: #ff5b3a;
+
+  --font: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Unbounded Variable', 'Onest Variable', system-ui, sans-serif;
+  --font-video: 'Rubik', system-ui, sans-serif;
+
+  --r-sm: 12px;
+  --r: 20px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+  --shadow: 0 1px 0 rgba(16, 16, 21, 0.04), 0 16px 40px -22px rgba(16, 16, 21, 0.3);
+  --shadow-lg: 0 2px 0 rgba(16, 16, 21, 0.04), 0 40px 80px -36px rgba(16, 16, 21, 0.45);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --wrap: 1320px;
+  --pad: clamp(20px, 4vw, 56px);
+  --header-h: 76px;
+
+  /* ── video world (palette of the current videos; used by tasks and art inside a stage) ── */
+  --paper: #f3ebdd;
+  --paper-2: #e9dec9;
+  --paper-3: #ddd0b8;
+  --white: #fffdf8;
+  --ink: #1d1a2b;
+  --ink-2: #2c2840;
+  --ink-3: #3d3856;
+  --red: #e5533c;
+  --mustard: #f4b23e;
+  --teal: #2b8c82;
+  --blue: #3a5ba0;
+  --plum: #7a4e8c;
+  --green: #4bae6a;
+  --muted: #7d7568;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+::selection {
+  background: var(--lime);
+  color: var(--fg);
+}
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+input {
+  font: inherit;
+}
+
+/* ───────── type ───────── */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+.h1 {
+  font-size: clamp(44px, 7vw, 120px);
+}
+.h2 {
+  font-size: clamp(34px, 4.6vw, 76px);
+}
+.h3 {
+  font-size: clamp(24px, 2.4vw, 38px);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.dark .eyebrow {
+  color: var(--mute-dark);
+}
+.eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--eyebrow, var(--brand));
+}
+.lead {
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.5;
+  max-width: 36em;
+}
+.muted {
+  color: var(--mute);
+}
+.dark .muted {
+  color: var(--mute-dark);
+}
+.comma {
+  color: var(--red);
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ───────── layout ───────── */
+.wrap {
+  width: 100%;
+  max-width: calc(var(--wrap) + var(--pad) * 2);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+.section {
+  position: relative;
+  padding: clamp(80px, 10vw, 150px) 0;
+}
+.dark {
+  background: var(--night);
+  color: #f4f3f0;
+}
+/* faint engineering grid on dark sections */
+.gridbg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(var(--line-dark) 1px, transparent 1px), linear-gradient(90deg, var(--line-dark) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 70%);
+}
+
+.grain {
+  position: fixed;
+  inset: -100px;
+  pointer-events: none;
+  z-index: 9000;
+  background-image: url('/grain.png');
+  mix-blend-mode: overlay;
+  opacity: 0.07;
+  animation: grain 0.6s steps(4) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-37px, 21px); }
+  50% { transform: translate(18px, -44px); }
+  75% { transform: translate(-12px, 33px); }
+  100% { transform: translate(29px, -9px); }
+}
+
+/* ───────── buttons ───────── */
+.btn {
+  --bg: var(--fg);
+  --fgc: #fff;
+  --hover: var(--brand);
+  --hover-fg: #fff;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 58px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--fgc);
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out), color 0.35s, opacity 0.2s;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--hover);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--ease-out);
+}
+.btn:hover {
+  color: var(--hover-fg);
+}
+.btn:hover::before {
+  transform: translateY(0);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn[disabled] {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.btn .arrow {
+  transition: transform 0.4s var(--ease-out);
+}
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+.btn--primary,
+.btn--mustard {
+  --bg: var(--lime);
+  --fgc: var(--fg);
+  --hover: var(--fg);
+  --hover-fg: #fff;
+}
+.dark .btn--primary {
+  --hover: #fff;
+  --hover-fg: var(--fg);
+}
+.btn--paper,
+.btn--light {
+  --bg: #fff;
+  --fgc: var(--fg);
+  --hover: var(--lime);
+  --hover-fg: var(--fg);
+}
+.btn--ghost {
+  --bg: transparent;
+  --fgc: currentColor;
+  --hover: var(--fg);
+  --hover-fg: #fff;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+.dark .btn--ghost {
+  --hover: #fff;
+  --hover-fg: var(--fg);
+}
+.btn--sm {
+  height: 44px;
+  padding: 0 18px;
+  font-size: 15px;
+}
+.btn--green {
+  --bg: var(--green);
+  --fgc: #fff;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(16, 16, 21, 0.06);
+  white-space: nowrap;
+}
+.dark .chip {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* stacked fraction in html (video world colours) */
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 0.92;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.frac > .n {
+  color: var(--frac-n, var(--red));
+}
+.frac > .d {
+  color: var(--frac-d, var(--teal));
+}
+.frac > .bar {
+  width: 112%;
+  height: 0.09em;
+  min-height: 2px;
+  margin: 0.08em 0 0.1em;
+  border-radius: 9px;
+  background: currentColor;
+}
+.frac--plain > .n,
+.frac--plain > .d {
+  color: inherit;
+}
+
+/* page change: circular wipe from the click point */
+::view-transition-old(root) {
+  animation: none;
+}
+::view-transition-new(root) {
+  animation: vt-reveal 0.7s var(--ease-out) both;
+}
+@keyframes vt-reveal {
+  from {
+    clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+  to {
+    clip-path: circle(150vmax at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .grain {
+    display: none;
+  }
+}
+@media (pointer: fine) {
+  body.has-cursor,
+  body.has-cursor a,
+  body.has-cursor button {
+    cursor: none;
+  }
+}
